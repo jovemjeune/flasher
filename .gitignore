@@ -1,26 +1,94 @@
-# Compiler files
+# ============ Foundry ============
 cache/
 out/
-ai_agent/__pycache__
-ai_agent/venv/lib 
+.broadcast/
+forge-cache/
 
-# Ignores development broadcast logs
+# Dependencies (install with forge install)
+lib/
+
+# Ignores development broadcast logs (keep broadcast/, ignore local dev logs)
 !/broadcast
 /broadcast/*/31337/
 /broadcast/**/dry-run/
 
-# Docs
-docs/
+# ============ Python / AI Agent ============
+# Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
 
-# Dotenv file
+# Virtual environments
+ai_agent/venv/
+ai_agent/env/
+ai_agent/.venv/
+env/
+venv/
+ENV/
+.venv
+
+# Python build artifacts
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Python logs
+*.log
+
+# ============ IDE / Editor ============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# ============ OS Files ============
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.directory
+
+# ============ Environment & Secrets ============
 .env
+.env.*
+!.env.example
+*.env.local
 
 # AI Agent configuration files (contain sensitive data)
 ai_agent/config.json
 ai_agent/.env
 
-# Production related AI generated documentation files 
+# ============ Documentation (Generated/AI) ============
+docs/
+SECURITY_AUDIT.md
+INTEGRATION_TEST_SUMMARY.md
+SECURITY_FIXES.md
 README_PERSONAL.md 
-CLEANUP_SUMMARY.md 
+CLEANUP_SUMMARY.md
+
+# ============ Deployment & Build Artifacts ============
+deployment-info.txt
+*.sol.timestamp
+gas_report.txt 
+
+
 
 
