@@ -1,0 +1,150 @@
+{
+  "rpc_url": "https://arb1.arbitrum.io/rpc",
+  "contract_abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_swapRouter",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "poolAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "token0",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "token1",
+          "type": "address"
+        },
+        {
+          "internalType": "uint24",
+          "name": "fee",
+          "type": "uint24"
+        }
+      ],
+      "name": "addPool",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "pool",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount0",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount1",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "executeAIFlashLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getSupportedPools",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "supported_pools": [
+    {
+      "name": "WETH-USDC",
+      "pool_address": "0xC31E54c7a869B9FcBEcc14363CF510d1c41fa443",
+      "token0": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "token1": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
+      "fee": 3000,
+      "description": "WETH-USDC 0.3% fee tier"
+    },
+    {
+      "name": "WETH-USDT",
+      "pool_address": "0x641c00c822B8a6c5A3b4b4B4b4b4b4b4b4b4b4b4",
+      "token0": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "token1": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "fee": 3000,
+      "description": "WETH-USDT 0.3% fee tier"
+    },
+    {
+      "name": "UNI-USDC",
+      "pool_address": "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8",
+      "token0": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
+      "token1": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
+      "fee": 3000,
+      "description": "UNI-USDC 0.3% fee tier"
+    },
+    {
+      "name": "UNI-USDT",
+      "pool_address": "0x4e68Ccd3E89f51C3074ca5072bbAC773960dFa36",
+      "token0": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
+      "token1": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      "fee": 3000,
+      "description": "UNI-USDT 0.3% fee tier"
+    },
+    {
+      "name": "WETH-DAI",
+      "pool_address": "0x6c6Bc977E13Df9b0de53b251522280BB72383700",
+      "token0": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+      "token1": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+      "fee": 3000,
+      "description": "WETH-DAI 0.3% fee tier"
+    },
+    {
+      "name": "UNI-DAI",
+      "pool_address": "0x1d42064Fc5B6ea0dED4b6Cb2955649B4A962E7c5",
+      "token0": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
+      "token1": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
+      "fee": 3000,
+      "description": "UNI-DAI 0.3% fee tier"
+    }
+  ],
+  "test_amount": 1000000000000000000,
+  "min_profit_bps": 50,
+  "max_gas_price": 0.1,
+  "priority_fee": 0.01,
+  "check_interval": 1,
+  "uniswap_quoter_address": "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6",
+  "sushiswap_router_address": "0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506",
+  "tokens": {
+    "WETH": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+    "USDC": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
+    "USDT": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+    "UNI": "0xFa7F8980b0f1E64A2062791cc3b0871572f1F7f0",
+    "DAI": "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"
+  }
+}
+
