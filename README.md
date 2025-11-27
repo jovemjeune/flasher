@@ -39,10 +39,13 @@ A simplified, open-source flash loan arbitrage system designed for personal use 
 git clone <repository-url>
 cd flasher
 
-# Install Foundry dependencies
+# Install Foundry dependencies (required libraries)
+forge install foundry-rs/forge-std --no-commit
 forge install OpenZeppelin/openzeppelin-contracts --no-commit
+forge install Uniswap/v3-core --no-commit
+forge install Uniswap/v3-periphery --no-commit
 
-# Install Python dependencies
+# Install Python dependencies (for ML agent)
 cd ai_agent
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -60,21 +63,83 @@ nano ai_agent/.env
 nano ai_agent/config.json
 ```
 
+**Important:** After copying `.env.example` to `.env`, you'll need to add your `PRIVATE_KEY` manually:
+```bash
+# Add to ai_agent/.env file:
+echo "PRIVATE_KEY=your_private_key_here" >> ai_agent/.env
+
+# ⚠️ SECURITY: Never commit .env files with real private keys!
+# ⚠️ The .env.example file intentionally excludes PRIVATE_KEY for security
+```
+
 ## 🚀 Deployment
 
+### Setup Wallet (Secure Method - Recommended)
+
+**Import your private key securely using `cast wallet import`:**
+
+```bash
+# 1. Import your wallet (will prompt for password)
+cast wallet import deployer --interactive
+
+# 2. Get your wallet address
+DEPLOYER_ADDRESS=$(cast wallet address deployer)
+echo "Deployer address: $DEPLOYER_ADDRESS"
+
+# 3. Verify the wallet is imported
+cast wallet list
+```
+
+**Benefits:**
+- ✅ Private key encrypted with password
+- ✅ Not stored in plain text environment variables
+- ✅ More secure than `PRIVATE_KEY` env var
+
 ### 1. Deploy Contract
+
+**Secure Method (Recommended):**
+```bash
+# Set optional environment variables
+export AI_AGENT_ADDRESS="your-ai-agent-address"  # Optional
+
+# Deploy using imported wallet
+forge script script/DeployPersonalFlashLoan.s.sol \
+  --rpc-url arbitrum_one \
+  --broadcast \
+  --verify \
+  --froms $(cast wallet address deployer)
+```
+
+**Legacy Method (Less Secure):**
 ```bash
 # Set environment variables
-export PRIVATE_KEY="your-private-key"
+export PRIVATE_KEY="your-private-key"  # ⚠️ Less secure
 export AI_AGENT_ADDRESS="your-ai-agent-address"
 
 # Deploy to Arbitrum One
-forge script script/DeployPersonalFlashLoan.s.sol --rpc-url arbitrum_one --broadcast --verify
+forge script script/DeployPersonalFlashLoan.s.sol \
+  --rpc-url arbitrum_one \
+  --broadcast \
+  --verify
 ```
 
 ### 2. Add Supported Pools
+
+**Secure Method:**
 ```bash
-# Add pools after deployment
+export CONTRACT_ADDRESS="your-deployed-contract-address"
+
+forge script script/AddPools.s.sol \
+  --rpc-url arbitrum_one \
+  --broadcast \
+  --froms $(cast wallet address deployer)
+```
+
+**Legacy Method:**
+```bash
+export PRIVATE_KEY="your-private-key"
+export CONTRACT_ADDRESS="your-deployed-contract-address"
+
 forge script script/AddPools.s.sol --rpc-url arbitrum_one --broadcast
 ```
 
@@ -95,8 +160,11 @@ python test_personal_contract_integration.py
 ### Production Mode
 ```bash
 # Run ML agent in production
+# ⚠️ Requires PRIVATE_KEY in ai_agent/.env file
 python ml_flash_loan_agent.py
 ```
+
+**Note:** Production mode requires `PRIVATE_KEY` in your `.env` file. The agent will fail with a clear error message if it's missing. Test mode (`--test` flag) doesn't require `PRIVATE_KEY`.
 
 ## 🧪 Testing
 
