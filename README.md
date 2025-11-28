@@ -1,5 +1,4 @@
-# Personal Flash Loan Arbitrage Protocol
-
+# Flasher
 A simplified, open-source flash loan arbitrage system designed for personal use only. This protocol combines a smart contract with a machine learning agent to execute automated arbitrage operations across multiple DEXes.
 
 ## 🚀 Features
@@ -47,8 +46,9 @@ forge install Uniswap/v3-periphery --no-git
 
 # Install Python dependencies (for ML agent)
 cd ai_agent
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate
+cd ../../ # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -148,7 +148,7 @@ forge script script/AddPools.s.sol --rpc-url arbitrum_one --broadcast
 ### Test Mode (Safe)
 ```bash
 cd ai_agent
-source venv/bin/activate
+source .venv/bin/activate
 
 # Test ML agent
 python ml_flash_loan_agent.py --test
