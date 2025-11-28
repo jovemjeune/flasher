@@ -40,10 +40,10 @@ git clone <repository-url>
 cd flasher
 
 # Install Foundry dependencies (required libraries)
-forge install foundry-rs/forge-std --no-commit
-forge install OpenZeppelin/openzeppelin-contracts --no-commit
-forge install Uniswap/v3-core --no-commit
-forge install Uniswap/v3-periphery --no-commit
+forge install foundry-rs/forge-std --no-git
+forge install OpenZeppelin/openzeppelin-contracts --no-git
+forge install Uniswap/v3-core --no-git
+forge install Uniswap/v3-periphery --no-git
 
 # Install Python dependencies (for ML agent)
 cd ai_agent
